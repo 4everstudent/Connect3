@@ -1,13 +1,27 @@
 package a4everstudent.connect3;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ImageView;
 
 
-// TODO: 15-09-2016 add dropdown animation
+
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public void dropIn(View view){
+
+        ImageView counter = (ImageView) view;
+
+        counter.setTranslationY(-1000f);
+
+        counter.setImageResource(R.drawable.yellow);
+
+        counter.animate().translationYBy(1000f).rotation(360).setDuration(1000);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
