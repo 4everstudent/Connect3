@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 // TODO: 16-09-2016 Fix layout in multiple devices
@@ -18,22 +20,41 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void checkWin(){
+        String winner;
+
         for (int [] winningPosition: winningPositions){
+
             if(gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
                     gameState[winningPosition[1]]== gameState[winningPosition[2]]&&
                     gameState[winningPosition[0]] != 2){
+
                 //someone won the game
-                System.out.println(gameState[winningPosition[0]]+" We have a winner!");
-            }
-            else {
+
+                //checks who won
+                if(gameState[winningPosition[0]]==1){
+                    winner = "Red ";
+                }
+                else{
+                    winner = "Yellow ";
+                }
+
+                //change winner message
+                TextView winnerMessage = (TextView) findViewById(R.id.winnerMsg);
+                winnerMessage.setText(winner + "has won!");
+
+                //show winner layout
+                final LinearLayout layout = (LinearLayout)findViewById(R.id.playAgainLayout);
+                layout.setVisibility(View.VISIBLE);
 
             }
+
         }
     }
 
     public void dropIn(View view){
 
         ImageView counter = (ImageView) view;
+
 
         int  tappedCounter = Integer.parseInt(counter.getTag().toString());
 
@@ -56,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 activePlayer = 0;
             }
 
-            counter.animate().translationYBy(1000f).rotation(360).setDuration(1000);
+            counter.animate().translationYBy(1000f).rotation(360).setDuration(300);
 
             checkWin();
 
